@@ -5,7 +5,8 @@ class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         try:
             url = "https://api.bybit.com/v5/market/orderbook?category=linear&symbol=BTCUSDT&limit=50"
-            with urllib.request.urlopen(url, timeout=5) as r:
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, timeout=5) as r:
                 data = r.read().decode()
             
             self.send_response(200)
